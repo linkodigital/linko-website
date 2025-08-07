@@ -221,7 +221,7 @@ const linkoFacts = [
     "This website was built with 98% Windows 98 nostalgia and 2% modern web magic",
     "Michele has a collection of 47 different design system components that he's never used",
     "Giovanni once fixed a critical bug by dreaming about the solution overnight",
-    "The team's unofficial motto: 'Design like it's 1998, code like it's 2024'",
+    "The team's unofficial motto: 'Design like it's 1998, code like it's " + new Date().getFullYear() + "'",
     "Michele can spot a misaligned pixel from across the room",
     "Giovanni's database queries are so optimized, they run faster than you can blink",
     "This desktop background was inspired by actual Windows 98 screenshots from the archives",
