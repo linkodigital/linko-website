@@ -291,8 +291,26 @@ document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
 });
 
+// Favicon dark mode detection
+function updateFavicon() {
+    const favicon = document.getElementById('favicon');
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        favicon.href = 'images/favicon white.svg';
+    } else {
+        favicon.href = 'images/favicon black.svg';
+    }
+}
+
+// Listen for dark mode changes
+if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
+}
+
 // Add some Windows 98 nostalgia
 document.addEventListener('DOMContentLoaded', function() {
+    // Set initial favicon
+    updateFavicon();
+    
     // Add welcome message
     setTimeout(() => {
         console.log('Welcome to Windows 98!');
