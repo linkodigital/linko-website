@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linko Team - Windows 98 Desktop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="desktop">
+        
+        <!-- Start Bar -->
+        <div class="start-bar">
+            <div class="start-bar-left">
+                <div class="start-button-wrapper">
+                    <div class="start-button">
+                        <img src="images/linko logo.svg" alt="Start">
+                        Start
+                    </div>
+                </div>
+            </div>
+            <div class="start-bar-right">
+                <div class="time-widget" id="time"></div>
+            </div>
+        </div>
+
+        <!-- Desktop Icons -->
+        <div class="desktop-icons">
+            <!-- Michele Paludetti Folder -->
+            <div class="desktop-icon" onclick="openFolder('michele')">
+                <div class="icon">
+                    <img src="images/directory_closed-4.png" alt="Folder">
+                </div>
+                <div class="icon-label">Michele Paludetti</div>
+            </div>
+
+            <!-- Giovanni Zorzato Folder -->
+            <div class="desktop-icon" onclick="openFolder('giovanni')">
+                <div class="icon">
+                    <img src="images/directory_closed-4.png" alt="Folder">
+                </div>
+                <div class="icon-label">Giovanni Zorzato</div>
+            </div>
+        </div>
+
+        <!-- Michele Paludetti Window -->
+        <div class="window" id="michele-window" style="display: none;">
+            <div class="window-header">
+                <div class="window-title">
+                    <img src="images/directory_closed-4.png" alt="Folder">
+                    <div class="title-container">
+                        <div class="title-text">Michele Paludetti - Product Designer</div>
+                    </div>
+                </div>
+                <div class="window-controls">
+                    <button class="minimize-btn" onclick="minimizeWindow('michele-window')">_</button>
+                    <button class="maximize-btn">□</button>
+                    <button class="close-btn" onclick="closeWindow('michele-window')">×</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="profile-section">
+                    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+                        <img src="images/michele linko photo.png" alt="Michele Paludetti" style="width: 120px; height: 120px; border: 3px outset #c0c0c0; object-fit: cover;">
+                        <div>
+                            <h2>Michele Paludetti</h2>
+                            <h3>Product Designer</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="bio-section">
+                        <h4>Bio</h4>
+                        <p>Passionate product designer with a focus on creating intuitive and user-centered digital experiences. Specializes in user interface design, user experience research, and design systems.</p>
+                    </div>
+
+                    <div class="skills-section">
+                        <h4>Skills</h4>
+                        <ul>
+                            <li>UI/UX Design</li>
+                            <li>Design Systems</li>
+                            <li>User Research</li>
+                            <li>Prototyping</li>
+                            <li>Figma</li>
+                            <li>Adobe Creative Suite</li>
+                            <li>Design Thinking</li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-section">
+                        <h4>Connect</h4>
+                        <a href="https://www.linkedin.com/in/michele-paludetti" target="_blank" class="linkedin-link">
+                            View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Giovanni Zorzato Window -->
+        <div class="window" id="giovanni-window" style="display: none;">
+            <div class="window-header">
+                <div class="window-title">
+                    <img src="images/directory_closed-4.png" alt="Folder">
+                    <div class="title-container">
+                        <div class="title-text">Giovanni Zorzato - Backend Developer</div>
+                    </div>
+                </div>
+                <div class="window-controls">
+                    <button class="minimize-btn" onclick="minimizeWindow('giovanni-window')">_</button>
+                    <button class="maximize-btn">□</button>
+                    <button class="close-btn" onclick="closeWindow('giovanni-window')">×</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="profile-section">
+                    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+                        <img src="images/giovanni linko photo.png" alt="Giovanni Zorzato" style="width: 120px; height: 120px; border: 3px outset #c0c0c0; object-fit: cover;">
+                        <div>
+                            <h2>Giovanni Zorzato</h2>
+                            <h3>Backend Developer</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="bio-section">
+                        <h4>Bio</h4>
+                        <p>Experienced backend developer with expertise in building scalable and robust server-side applications. Passionate about clean code, system architecture, and performance optimization.</p>
+                    </div>
+
+                    <div class="skills-section">
+                        <h4>Skills</h4>
+                        <ul>
+                            <li>Python</li>
+                            <li>Node.js</li>
+                            <li>Java</li>
+                            <li>PostgreSQL</li>
+                            <li>MongoDB</li>
+                            <li>Docker</li>
+                            <li>Kubernetes</li>
+                            <li>REST APIs</li>
+                            <li>Microservices</li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-section">
+                        <h4>Connect</h4>
+                        <a href="https://www.linkedin.com/in/giovanni-zorzato-a6aa044a/" target="_blank" class="linkedin-link">
+                            View on LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
