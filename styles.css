@@ -473,14 +473,15 @@ body {
     }
     
     .desktop-icons {
-        padding: 10px;
+        padding: 20px;
         gap: 40px;
         flex-direction: column;
-        height: 100vh;
-        height: calc(100 * var(--vh)); /* Use dynamic viewport height */
-        padding-top: 40px; /* Give more space at the top */
+        height: auto;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-top: 20px;
         padding-bottom: 80px; /* Account for start bar */
-        margin-top: 0; /* Reset margin */
+        margin-top: 0;
     }
     
     .icon-label {
@@ -663,10 +664,12 @@ body {
         font-size: 16px;
     }
     
-    /* Give more space at the top on very small screens */
+    /* Adjust spacing for very small screens */
     .desktop-icons {
-        padding-top: 30px; /* Give more space at the top on small screens */
-        margin-top: 0; /* Reset margin */
+        padding: 15px;
+        gap: 30px;
+        padding-top: 15px;
+        margin-top: 0;
     }
     
     /* Very small screen title scrolling */
@@ -811,7 +814,7 @@ body {
 .version-number {
     position: fixed;
     top: 10px;
-    left: 10px;
+    right: 10px;
     color: rgba(255, 255, 255, 0.3);
     font-family: 'Windows Regular', 'MS Sans Serif', sans-serif;
     font-size: 12px;

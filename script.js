@@ -16,15 +16,35 @@ window.addEventListener('orientationchange', () => {
     setTimeout(setViewportHeight, 100);
 });
 
+// Handle window resize for proper mobile centering
+window.addEventListener('resize', () => {
+    // Only run this for mobile devices
+    if (window.innerWidth <= 768) {
+        const openWindows = document.querySelectorAll('.window[style*="display: block"]');
+        openWindows.forEach(windowElement => {
+            windowElement.style.left = '50%';
+            windowElement.style.top = '50%';
+            windowElement.style.transform = 'translate(-50%, -50%)';
+            windowElement.style.width = 'auto';
+            windowElement.style.height = 'auto';
+            windowElement.style.maxWidth = window.innerWidth <= 480 ? 'calc(92vw - 30px)' : 'calc(90vw - 40px)';
+            windowElement.style.maxHeight = 'calc(75vh - 80px)';
+        });
+    }
+});
+
 // Update time in taskbar
 function updateTime() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    });
-    document.getElementById('time').textContent = timeString;
+    const timeElement = document.getElementById('time');
+    if (timeElement) {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+        timeElement.textContent = timeString;
+    }
 }
 
 // Update time every second
@@ -51,6 +71,15 @@ function openFolder(folderName) {
         // Reset dimensions to auto
         window.style.width = 'auto';
         window.style.height = 'auto';
+        
+        // Ensure proper sizing for mobile
+        if (window.innerWidth <= 768) {
+            window.style.maxWidth = 'calc(90vw - 40px)';
+            window.style.maxHeight = 'calc(75vh - 80px)';
+        } else if (window.innerWidth <= 480) {
+            window.style.maxWidth = 'calc(92vw - 30px)';
+            window.style.maxHeight = 'calc(75vh - 80px)';
+        }
         
         // Bring to front
         window.style.zIndex = '100';
@@ -135,8 +164,18 @@ function removeAllStartBarWindows() {
     });
 }
 
-// Make windows draggable
+// Make windows draggable (desktop only)
 function makeWindowDraggable(windowElement) {
+    // Check if device is mobile/touch
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                     ('ontouchstart' in window) || 
+                     (window.innerWidth <= 768);
+    
+    // Don't add dragging behavior on mobile devices
+    if (isMobile) {
+        return;
+    }
+    
     const header = windowElement.querySelector('.window-header');
     let isDragging = false;
     let startX, startY;
@@ -193,14 +232,6 @@ function makeWindowDraggable(windowElement) {
         isDragging = false;
     }
 }
-
-// Initialize draggable windows
-document.addEventListener('DOMContentLoaded', function() {
-    const windows = document.querySelectorAll('.window');
-    windows.forEach(window => {
-        makeWindowDraggable(window);
-    });
-});
 
 // Click sound effect (optional)
 function playClickSound() {
@@ -284,38 +315,6 @@ function showLinkoFact() {
     }, 8000);
 }
 
-// Start button functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const startButton = document.querySelector('.start-button');
-    if (startButton) {
-        startButton.addEventListener('click', function() {
-            playClickSound();
-            showLinkoFact();
-        });
-    }
-});
-
-// Close windows when clicking outside
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.window') && !e.target.closest('.desktop-icon')) {
-        closeAllWindows();
-    }
-});
-
-// Prevent context menu on desktop
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-});
-
-// Add some Windows 98 nostalgia
-document.addEventListener('DOMContentLoaded', function() {
-    // Add welcome message
-    setTimeout(() => {
-        console.log('Welcome to Windows 98!');
-        console.log('Click on the folders to view team member profiles.');
-    }, 1000);
-});
-
 // Handle window focus
 function bringToFront(windowElement) {
     const windows = document.querySelectorAll('.window');
@@ -329,12 +328,42 @@ function bringToFront(windowElement) {
     windowElement.style.zIndex = maxZ + 1;
 }
 
-// Add click handlers to bring windows to front
+// Main initialization function
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize draggable windows
     const windows = document.querySelectorAll('.window');
     windows.forEach(window => {
+        makeWindowDraggable(window);
+        // Add click handlers to bring windows to front
         window.addEventListener('click', function() {
             bringToFront(this);
         });
     });
+    
+    // Start button functionality
+    const startButton = document.querySelector('.start-button');
+    if (startButton) {
+        startButton.addEventListener('click', function() {
+            playClickSound();
+            showLinkoFact();
+        });
+    }
+    
+    // Add welcome message
+    setTimeout(() => {
+        console.log('Welcome to Windows 98!');
+        console.log('Click on the folders to view team member profiles.');
+    }, 1000);
+});
+
+// Close windows when clicking outside
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.window') && !e.target.closest('.desktop-icon')) {
+        closeAllWindows();
+    }
+});
+
+// Prevent context menu on desktop
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
 }); 
