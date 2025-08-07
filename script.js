@@ -1,5 +1,21 @@
 // Windows 98 Desktop JavaScript
 
+// Viewport height management for mobile devices
+function setViewportHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Set initial viewport height
+setViewportHeight();
+
+// Update viewport height on resize and orientation change
+window.addEventListener('resize', setViewportHeight);
+window.addEventListener('orientationchange', () => {
+    // Delay to ensure orientation change is complete
+    setTimeout(setViewportHeight, 100);
+});
+
 // Update time in taskbar
 function updateTime() {
     const now = new Date();

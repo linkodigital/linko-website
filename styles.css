@@ -1,4 +1,18 @@
 /* Windows 98 Desktop Styles */
+
+/* CSS Custom Properties for viewport handling */
+:root {
+    --vh: 1vh;
+    --dvh: 1dvh;
+}
+
+/* Set dynamic viewport height for mobile devices */
+@supports (height: 100dvh) {
+    :root {
+        --vh: 1dvh;
+    }
+}
+
 @font-face {
     font-family: 'Windows Regular';
     src: url('fonts/Windows Regular.ttf') format('truetype');
@@ -16,6 +30,7 @@ body {
     font-family: 'Windows Regular', 'MS Sans Serif', 'Microsoft Sans Serif', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #008080 0%, #0080C4 100%);
     height: 100vh;
+    height: calc(100 * var(--vh)); /* Use dynamic viewport height */
     overflow: hidden;
     cursor: default;
 }
@@ -23,6 +38,7 @@ body {
 .desktop {
     width: 100vw;
     height: 100vh;
+    height: calc(100 * var(--vh)); /* Use dynamic viewport height */
     position: relative;
     background-image: 
         url('images/Linko logo Win98.svg'),
@@ -209,6 +225,7 @@ body {
     z-index: 100;
     cursor: default;
     max-height: 80vh;
+    max-height: calc(80 * var(--vh)); /* Use dynamic viewport height */
     overflow: hidden;
 }
 
@@ -302,6 +319,7 @@ body {
 .window-content {
     padding: 30px;
     max-height: calc(80vh - 60px); /* Account for header height */
+    max-height: calc(80 * var(--vh) - 60px); /* Use dynamic viewport height */
     overflow-y: auto;
 }
 
@@ -416,11 +434,13 @@ body {
         left: 50%;
         transform: translateX(-50%);
         max-height: 85vh;
+        max-height: calc(80 * var(--vh)); /* Reduced to ensure no overflow */
         overflow: hidden;
     }
     
     .window-content {
         max-height: calc(85vh - 60px); /* Account for header */
+        max-height: calc(80 * var(--vh) - 60px); /* Reduced to ensure no overflow */
         overflow-y: auto;
         padding: 20px;
     }
@@ -430,6 +450,7 @@ body {
         gap: 40px;
         flex-direction: column;
         height: 100vh;
+        height: calc(100 * var(--vh)); /* Use dynamic viewport height */
         padding-top: 0px; /* Move folders higher */
         padding-bottom: 80px; /* Account for start bar */
     }
@@ -457,6 +478,26 @@ body {
             bottom 80px right 45px,
             0 0,
             0 0;
+    }
+    
+    /* Android-specific adjustments for logo positioning */
+    @supports (height: 100dvh) {
+        .desktop {
+            background-position: 
+                bottom 100px right 45px, /* Increase bottom spacing for Android */
+                0 0,
+                0 0;
+        }
+    }
+    
+    /* Additional Android-specific adjustments */
+    @media screen and (max-width: 768px) and (orientation: portrait) {
+        .desktop {
+            background-position: 
+                bottom 120px right 45px, /* Even more bottom spacing for portrait Android */
+                0 0,
+                0 0;
+        }
     }
     
     /* Adjust text sizes for mobile */
@@ -513,11 +554,13 @@ body {
         max-width: 98vw;
         width: 98vw;
         top: 2%;
+        max-height: calc(85 * var(--vh)); /* Reduced to ensure no overflow */
     }
     
     .window-content {
         padding: 15px;
         max-height: calc(90vh - 60px);
+        max-height: calc(85 * var(--vh) - 60px); /* Reduced to ensure no overflow */
     }
     
     .desktop {
@@ -529,6 +572,26 @@ body {
             bottom 80px right 45px,
             0 0,
             0 0;
+    }
+    
+    /* Android-specific adjustments for very small screens */
+    @supports (height: 100dvh) {
+        .desktop {
+            background-position: 
+                bottom 100px right 45px, /* Increase bottom spacing for Android */
+                0 0,
+                0 0;
+        }
+    }
+    
+    /* Additional Android-specific adjustments for very small screens */
+    @media screen and (max-width: 480px) and (orientation: portrait) {
+        .desktop {
+            background-position: 
+                bottom 140px right 45px, /* Maximum bottom spacing for small portrait Android */
+                0 0,
+                0 0;
+        }
     }
     
     /* Further reduce text sizes for very small screens */
@@ -653,11 +716,26 @@ body {
     .linko-fact-box {
         min-width: 320px;
         max-width: 90vw;
-        margin: 20px;
+        /* Remove margin to fix centering */
     }
     
     .fact-content {
         padding: 15px;
         font-size: 16px;
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .window {
+        max-height: calc(75 * var(--vh)); /* More conservative for iOS */
+    }
+    
+    .window-content {
+        max-height: calc(75 * var(--vh) - 60px); /* More conservative for iOS */
+    }
+    
+    .desktop {
+        height: calc(100 * var(--vh)); /* Ensure iOS uses dynamic viewport */
     }
 } 
